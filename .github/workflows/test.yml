@@ -10,8 +10,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and start containers
-        run: docker compose up -d --build #
-        # Use 'docker compose' (V2 syntax) instead of 'docker-compose' (V1 deprecated)
+        run: |
+            cd ./integration
+            docker compose up -d --build
 
       - name: Check running containers (optional)
         run: docker ps #
