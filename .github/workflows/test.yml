@@ -1,0 +1,17 @@
+name: Test
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build and start containers
+        run: docker compose up -d --build #
+        # Use 'docker compose' (V2 syntax) instead of 'docker-compose' (V1 deprecated)
+
+      - name: Check running containers (optional)
+        run: docker ps #

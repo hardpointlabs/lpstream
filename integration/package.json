@@ -1,0 +1,11 @@
+{
+    "name": "integration-test",
+    "main": "./echo.js",
+    "dependencies": {
+        "@hardpointlabs/length-prefixed-stream": "^2.0.5"
+    },
+    "type": "module",
+    "scripts": {
+        "serve": "node ./echo.js"
+    }
+}
