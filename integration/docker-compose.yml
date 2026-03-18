@@ -1,5 +1,22 @@
 services:
-  web:
-    build: .
+  test-server:
+    build: ./server
+    hostname: test-server
     ports:
       - "8124:8124"
+    networks:
+      - test-network
+  client:
+    networks:
+      - test-network
+    build: ./client
+    healthcheck:
+      test: ["CMD", "nc", "vz", "test-server", "8124"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+networks:
+  test-network:
+    driver: bridge

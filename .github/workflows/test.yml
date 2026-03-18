@@ -12,7 +12,11 @@ jobs:
       - name: Build and start containers
         run: |
             cd ./integration
-            docker compose up -d --build
+            docker compose up --force-recreate --build -d
+      
+      - name: Start client test runner
+        run: docker compose run client ./client
 
-      - name: Check running containers (optional)
-        run: docker ps #
+      - name: Clean up containers
+        run: docker compose down --volumes
+        if: always()

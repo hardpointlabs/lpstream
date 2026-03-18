@@ -37,7 +37,7 @@ func generateSecureAlphanumeric(length int) ([]byte, error) {
 
 func main() {
 	log.Println("Starting client")
-	conn, err := net.DialTimeout("tcp", "127.0.0.1:8124", 10*time.Second)
+	conn, err := net.DialTimeout("tcp", "test-server:8124", 10*time.Second)
 	if err != nil {
 		fmt.Printf("dial error: %v\n", err)
 		return
