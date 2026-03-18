@@ -1,4 +1,4 @@
-# lpstream 🖼️
+# lpstream
 
 > [!NOTE]  
 > This is purely for internal use! Please don't depend on this library in your own code, we don't make any compatibility/API stability guarantees!
