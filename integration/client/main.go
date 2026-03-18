@@ -48,6 +48,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	writer := lpstream.NewWriter(conn)
 	reader := lpstream.NewReader(conn)
 

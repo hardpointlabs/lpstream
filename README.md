@@ -18,5 +18,19 @@ go get github.com/hardpointlabs/framer
 Layer it on top of your `io.Reader` / `io.Writer`:
 
 ```golang
+import (
+    // ...
+    "github.com/hardpointlabs/lpstream"
+)
 
+conn, _ := net.DialTimeout("tcp", "test-server:8124", 10*time.Second)
+defer conn.Close()
+
+encoder := lpstream.NewWriter(conn)
+decoder := lpstream.NewReader(conn)
+
+encoder.WriteFrame([]byte("Hello, stream!"))
+
+msg := decoder.ReadFrame()
+// e.t.c...
 ```
