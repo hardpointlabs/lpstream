@@ -1,24 +1,21 @@
 name: Test
-on: [push]
-
+on:
+  push:
+  pull_request:
+    branches: [ "master" ]
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Build and start containers
-        working-directory: ./integration
-        run: docker compose up --force-recreate --build -d
-      
-      - name: Start client test runner
-        working-directory: ./integration
-        run: docker compose run client ./client
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
 
-      - name: Clean up containers
-        working-directory: ./integration
-        run: docker compose down --volumes
-        if: always()
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: go test -v ./...
