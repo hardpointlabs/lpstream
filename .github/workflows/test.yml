@@ -11,13 +11,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and start containers
-        run: |
-            cd ./integration
-            docker compose up --force-recreate --build -d
+        working-directory: ./integration
+        run: docker compose up --force-recreate --build -d
       
       - name: Start client test runner
+        working-directory: ./integration
         run: docker compose run client ./client
 
       - name: Clean up containers
+        working-directory: ./integration
         run: docker compose down --volumes
         if: always()
