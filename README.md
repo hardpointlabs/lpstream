@@ -26,8 +26,11 @@ import (
 conn, _ := net.DialTimeout("tcp", "test-server:8124", 10*time.Second)
 defer conn.Close()
 
-encoder := lpstream.NewWriter(conn)
-decoder := lpstream.NewReader(conn)
+encoder := lpstream.NewEncoder(conn)
+decoder := lpstream.NewDecoder(conn)
+
+// or use the codec type if you have a bidirectional stream
+codec := lpstream.NewFrameCodec(conn)
 
 encoder.WriteFrame([]byte("Hello, stream!"))
 
