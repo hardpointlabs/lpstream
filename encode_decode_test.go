@@ -7,7 +7,7 @@ import (
 
 func TestEncodeDecode(t *testing.T) {
 	var b bytes.Buffer
-	w := NewWriter(&b)
+	w := NewEncoder(&b)
 
 	data1 := []byte("hello")
 	data2 := []byte("world!")
@@ -21,7 +21,7 @@ func TestEncodeDecode(t *testing.T) {
 	}
 
 	// read back
-	r := NewReader(&b)
+	r := NewDecoder(&b)
 	got1, err := r.ReadFrame()
 	if err != nil {
 		t.Fatal(err)

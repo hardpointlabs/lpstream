@@ -5,13 +5,13 @@ import (
 	"io"
 )
 
-// Writer writes length‑prefixed frames using protobuf varints.
+// Encoder writes length‑prefixed frames using protobuf varints.
 type Encoder struct {
 	w io.Writer
 }
 
-// NewWriter wraps an io.Writer
-func NewWriter(w io.Writer) *Encoder {
+// Creates a new Encoder from an io.Writer
+func NewEncoder(w io.Writer) *Encoder {
 	return &Encoder{w: w}
 }
 

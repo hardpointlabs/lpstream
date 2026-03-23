@@ -5,17 +5,18 @@ import (
 	"io"
 )
 
-// Reader reads varint‑framed payloads from an io.Reader.
+// Decoder reads varint‑framed payloads from an io.Reader.
 type Decoder struct {
 	r io.Reader
 }
 
-// NewReader wraps an io.Reader
-func NewReader(r io.Reader) *Decoder {
+// Creates a new frame decoder from an io.Reader.
+func NewDecoder(r io.Reader) *Decoder {
 	return &Decoder{r: r}
 }
 
 // ReadFrame returns the next complete frame.
+// Blocks until the amount of bytes declared in the prefix have been read.
 func (d *Decoder) ReadFrame() ([]byte, error) {
 	// Read varint prefix byte‑by‑byte
 	var (
