@@ -30,3 +30,11 @@ func (e *Encoder) WriteFrame(payload []byte) error {
 	_, err := e.w.Write(payload)
 	return err
 }
+
+// Write implements io.Writer by delegating to WriteFrame.
+func (e *Encoder) Write(p []byte) (int, error) {
+	if err := e.WriteFrame(p); err != nil {
+		return 0, err
+	}
+	return len(p), nil
+}
