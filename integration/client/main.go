@@ -49,8 +49,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	writer := lpstream.NewWriter(conn)
-	reader := lpstream.NewReader(conn)
+	writer := lpstream.NewEncoder(conn)
+	reader := lpstream.NewDecoder(conn)
 
 	err = writer.WriteFrame(msg)
 	if err != nil {
